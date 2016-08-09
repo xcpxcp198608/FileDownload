@@ -5,7 +5,7 @@ package com.px.filedownload.FileDownload;
  */
 public interface DownloadStatusListener  {
     void onStartDownload(boolean isStart);
-    void onPauseDownload(boolean isPause , long finishedPosition);
+    void onPauseDownload(boolean isPause , int progress);
     void onFailDownload(Exception e);
     void onProgressChanged (int progress , long finishedPosition);
     void onFinishedDownload(int progress , boolean isFinished);

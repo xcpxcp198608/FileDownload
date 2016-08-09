@@ -26,7 +26,6 @@ public class DownloadManager {
     }
 
     public void startDownload () {
-        Log.d(DOWNLOAD_TAG , "to ---- start service");
         Intent intent = new Intent(context , DownloadService.class);
         intent.setAction(ACTION_START_DOWNLOAD);
         intent.putExtra("downloadFileInfo" , downloadFileInfo);
@@ -34,14 +33,12 @@ public class DownloadManager {
     }
 
     public void pauseDownload () {
-        Log.d(DOWNLOAD_TAG , "to ---- pause service");
         Intent intent = new Intent(context , DownloadService.class);
         intent.setAction(ACTION_PAUSE_DOWNLOAD);
         context.startService(intent);
     }
 
     public void cancelDownload () {
-        Log.d(DOWNLOAD_TAG , "to ---- cancel service");
         Intent intent = new Intent(context , DownloadService.class);
         intent.setAction(ACTION_CANCEL_DOWNLOAD);
         intent.putExtra("downloadFileInfo" , downloadFileInfo);

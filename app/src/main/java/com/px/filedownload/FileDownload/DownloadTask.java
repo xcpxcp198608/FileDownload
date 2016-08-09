@@ -36,14 +36,15 @@ public class DownloadTask  {
         public void handleMessage(Message msg) {
             switch (msg.what){
                 case DownloadService.MSG_START_DOWNLOAD :
-                    Log.d(DownloadManager.DOWNLOAD_TAG , "msg_start");
                     if(downloadStatusListener != null) {
                         downloadStatusListener.onStartDownload(true);
                     }
                     break;
                 case DownloadService.MSG_PAUSE_DOWNLOAD :
                     if(downloadStatusListener != null) {
-                        downloadStatusListener.onPauseDownload(true , (Long) msg.obj);
+                        long finished = (long) msg.obj;
+                        int progress = (int) (finished*100/downloadFileInfo.getFileSize());
+                        downloadStatusListener.onPauseDownload(true ,  progress);
                     }
                     break;
                 case DownloadService.MSG_FINISHED_DOWNLOAD :
@@ -161,9 +162,7 @@ public class DownloadTask  {
             handler.sendEmptyMessage(DownloadService.MSG_START_DOWNLOAD);
             finishedPosition += downloadThreadInfo.getFinishedPosition();
             try {
-                Log.d(DownloadManager.DOWNLOAD_TAG , "file seek");
                 if(httpURLConnection.getResponseCode() == HttpsURLConnection.HTTP_PARTIAL) {
-                    Log.d(DownloadManager.DOWNLOAD_TAG , "file seek1");
                     inputStream = httpURLConnection.getInputStream();
                     byte [] buffer = new byte [1024*4];
                     int length = -1;

@@ -62,8 +62,8 @@ public class Demo extends AppCompatActivity {
             }
 
             @Override
-            public void onPauseDownload(boolean isPause, long finishedPosition) {
-                tv_FileName.setText("pause"+finishedPosition);
+            public void onPauseDownload(boolean isPause, int progress) {
+                tv_FileName.setText("pause"+"---"+progress+"%");
             }
 
             @Override

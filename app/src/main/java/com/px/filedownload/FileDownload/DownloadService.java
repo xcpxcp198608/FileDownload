@@ -50,7 +50,6 @@ public class DownloadService extends Service{
             super.handleMessage(msg);
             switch (msg.what){
                 case MSG_PREPARE_DOWNLOAD :
-                    Toast.makeText(getApplicationContext(),PREPARE_DOWNLOAD ,Toast.LENGTH_SHORT).show();
                     DownloadFileInfo downloadFileInfo = (DownloadFileInfo) msg.obj;
                     downloadTask = new DownloadTask(getApplicationContext(), downloadFileInfo);
                     downloadTask.startDownload();
